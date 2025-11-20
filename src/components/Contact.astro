@@ -1,0 +1,99 @@
+---
+import { Mail, Github, Linkedin } from '@lucide/astro'
+---
+
+<div id="contact" class="min-h-screen flex flex-col items-center justify-center px-4 py-20">
+	<h1 class="text-5xl sm:text-7xl md:text-9xl font-bold text-green-500 text-center mb-12 md:mb-20 contact-title">Contact</h1>
+	
+	<div class="max-w-2xl w-full">
+		<div class="contact-content rounded-lg p-6 md:p-10 border border-green-500">
+			<p class="text-lg md:text-xl mb-8 text-center">
+				Let's work together! Feel free to reach out through any of these channels:
+			</p>
+			
+			<div class="space-y-6">
+				<a href="mailto:moraparadaluisdavid@gmail.com" class="contact-item flex items-center gap-4 p-4 rounded-lg border border-green-500 transition-all hover:scale-105">
+					<Mail class="h-8 w-8 text-green-500" />
+					<div>
+						<p class="font-bold text-white hover:text-black">Email</p>
+						<p class="text-grey-300">moraparadaluisdavid@gmail.com</p>
+					</div>
+				</a>
+				
+				<a href="https://github.com/ldmora13" target="_blank" rel="noopener noreferrer" class="contact-item flex items-center gap-4 p-4 rounded-lg border border-green-500 transition-all hover:scale-105">
+					<Github class="h-8 w-8 text-green-500" />
+					<div>
+						<p class="font-bold text-white">GitHub</p>
+						<p class="text-gray-300">@ldmora13</p>
+					</div>
+				</a>
+				
+				<a href="https://www.linkedin.com/in/luis-david-mora-337253268/" target="_blank" rel="noopener noreferrer" class="contact-item flex items-center gap-4 p-4 rounded-lg border border-green-500 transition-all hover:scale-105">
+					<Linkedin class="h-8 w-8 text-green-500" />
+					<div>
+						<p class="font-bold text-white">LinkedIn</p>
+						<p class="text-gray-300">Luis David Mora</p>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	gsap.from(".contact-title", {
+		scrollTrigger: {
+			trigger: "#contact",
+			start: "top 80%",
+			end: "top 50%",
+			scrub: 1,
+		},
+		rotation: -10,
+		opacity: 0,
+	});
+
+	gsap.from(".contact-content", {
+		scrollTrigger: {
+			trigger: "#contact",
+			start: "top 70%",
+			end: "top 30%",
+			scrub: 1,
+		},
+		scale: 0.8,
+		opacity: 0,
+	});
+
+	gsap.from(".contact-item", {
+		scrollTrigger: {
+			trigger: ".contact-content",
+			start: "top 80%",
+			end: "top 40%",
+			scrub: 1,
+		},
+		x: -100,
+		opacity: 0,
+		stagger: 0.2,
+	});
+
+	document.querySelectorAll('.contact-item').forEach((item) => {
+		item.addEventListener('mouseenter', () => {
+			gsap.to(item, {
+				x: 10,
+				duration: 0.3,
+				ease: "power2.out"
+			});
+		});
+		item.addEventListener('mouseleave', () => {
+			gsap.to(item, {
+				x: 0,
+				duration: 0.3,
+				ease: "power2.out"
+			});
+		});
+	});
+</script>

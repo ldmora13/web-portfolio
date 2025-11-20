@@ -1,0 +1,61 @@
+---
+---
+
+<div id="about" class="min-h-screen flex flex-col items-center justify-center px-4 py-20">
+	<h1 class="text-5xl sm:text-7xl md:text-9xl font-bold text-green-500 text-center mb-12 md:mb-20 about-title">About Me</h1>
+	
+	<div class="max-w-4xl w-full">
+		<div class="about-content rounded-lg p-6 md:p-10 border border-green-500">
+			<p class="text-lg md:text-xl mb-6 leading-relaxed">
+				I'm a passionate Full Stack Developer from Medellín, Colombia, with a strong focus on creating elegant and efficient web solutions. My journey in software development has been driven by curiosity and a constant desire to learn new technologies.
+			</p>
+			<p class="text-lg md:text-xl mb-6 leading-relaxed">
+				I specialize in modern web technologies including React, Astro, and Tailwind CSS. I enjoy building responsive, user-friendly applications that solve real-world problems. My approach combines clean code practices with creative problem-solving.
+			</p>
+			<p class="text-lg md:text-xl leading-relaxed">
+				When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or working on personal projects that challenge my skills and expand my knowledge.
+			</p>
+		</div>
+	</div>
+</div>
+
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	gsap.from(".about-title", {
+		scrollTrigger: {
+			trigger: "#about",
+			start: "top 80%",
+			end: "top 50%",
+			scrub: 1,
+		},
+		scale: 0.5,
+		opacity: 0,
+	});
+
+	gsap.from(".about-content", {
+		scrollTrigger: {
+			trigger: "#about",
+			start: "top 70%",
+			end: "top 30%",
+			scrub: 1,
+		},
+		y: 100,
+		opacity: 0,
+	});
+
+	gsap.from(".about-content p", {
+		scrollTrigger: {
+			trigger: ".about-content",
+			start: "top 80%",
+			end: "top 40%",
+			scrub: 1,
+		},
+		x: -50,
+		opacity: 0,
+		stagger: 0.2,
+	});
+</script>

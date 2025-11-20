@@ -1,0 +1,75 @@
+---
+import { Github, Linkedin, Mail } from '@lucide/astro'
+---
+
+<div id="hero" class="min-h-screen relative flex items-center justify-center px-4">
+	<div class="flex flex-col items-center justify-center text-center">
+		<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-green-500" id="subtitle">
+			Software Developer
+		</h2>
+		<h1 class="text-5xl sm:text-7xl md:text-9xl font-bold mt-6 md:mt-10" id="title">
+			Luis David Mora
+		</h1>
+		<div id="info" class="flex flex-col items-center justify-center mt-20 md:mt-40">
+			<p class="text-xl sm:text-2xl md:text-3xl font-bold">
+				Full Stack Developer
+			</p>
+			<div class="flex flex-row items-center justify-center mt-6 md:mt-10 gap-5">
+				<a id="github-link" href="https://github.com/ldmora13" target="_blank" rel="noopener noreferrer" class="social-link">
+					<Github class='h-12 w-12 md:h-15 md:w-15 hover:scale-110 transition-all ease-in-out' />
+				</a>
+				<a id="linkedin-link" href="https://www.linkedin.com/in/luis-david-mora-337253268/" target="_blank" rel="noopener noreferrer" class="social-link">
+					<Linkedin class='h-12 w-12 md:h-15 md:w-15 hover:scale-110 transition-all ease-in-out' />
+				</a>
+				<a id="email-link" href="mailto:ldmora13@gmail.com" class="social-link">
+					<Mail class='h-12 w-12 md:h-15 md:w-15 hover:scale-110 transition-all ease-in-out' />
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	import { gsap } from "gsap";
+
+	gsap.from("#title", {
+		y: 50,
+		opacity: 0,
+		duration: 1,
+		ease: "power3.out",
+		delay: 0.3,
+	});
+
+	gsap.from("#subtitle", {
+		y: -50,
+		opacity: 0,
+		duration: 1,
+		ease: "power3.out",
+		delay: 0.3,
+	});
+
+	gsap.from("#info", {
+		y: 50,
+		opacity: 0,
+		duration: 1,
+		ease: "power3.out",
+		delay: 0.6,
+	});
+
+	document.querySelectorAll('.social-link').forEach((link) => {
+		link.addEventListener('mouseenter', () => {
+			gsap.to(link, {
+				y: -5,
+				duration: 0.3,
+				ease: "power2.out"
+			});
+		});
+		link.addEventListener('mouseleave', () => {
+			gsap.to(link, {
+				y: 0,
+				duration: 0.3,
+				ease: "power2.out"
+			});
+		});
+	});
+</script>

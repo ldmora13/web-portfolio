@@ -1,0 +1,83 @@
+---
+import { ExternalLink } from '@lucide/astro'
+---
+
+<div id="projects" class="min-h-screen flex flex-col items-center justify-center px-4 py-20">
+	<h1 class="text-5xl sm:text-7xl md:text-9xl font-bold text-green-500 text-center mb-12 md:mb-20 project-title">My Projects</h1>
+		<div class="project-card max-w-md rounded-xl border border-green-500 p-6 md:p-8">
+			<div class="flex justify-between items-start mb-4">
+				<h3 class="text-2xl md:text-3xl font-bold text-green-500">Jerseys Colombia</h3>
+				<a href="https://jerseyscol.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-500 transition-colors">
+					<ExternalLink class="h-6 w-6" />
+				</a>
+			</div>
+			<p class="text-gray-300 text-base md:text-lg mb-4">
+				E-commerce platform for Colombian soccer, NBA and F1 jerseys. Built with modern web technologies featuring a responsive design, shopping cart, wishlist, user authentication, payment methods, tracking and order history.
+			</p>
+			<div class="flex flex-wrap gap-2">
+				<span class="px-3 py-1 bg-green-500/20 text-green-500 rounded-full text-sm">React</span>
+				<span class="px-3 py-1 bg-green-500/20 text-green-500 rounded-full text-sm">Tailwind</span>
+				<span class="px-3 py-1 bg-green-500/20 text-green-500 rounded-full text-sm">JavaScript</span>
+			</div>
+		</div>
+</div>
+
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	gsap.from(".project-title", {
+		scrollTrigger: {
+			trigger: "#projects",
+			start: "top 80%",
+			end: "top 50%",
+			scrub: 1,
+		},
+		x: -100,
+		opacity: 0,
+	});
+
+	gsap.from(".project-card", {
+		scrollTrigger: {
+			trigger: "#projects",
+			start: "top 70%",
+			end: "top 30%",
+			scrub: 1,
+		},
+		y: 100,
+		opacity: 0,
+		stagger: 0.3,
+	});
+
+	document.querySelectorAll('.project-card').forEach((card) => {
+		card.addEventListener('mousemove', (e) => {
+			const rect = card.getBoundingClientRect();
+			const x = e.clientX - rect.left;
+			const y = e.clientY - rect.top;
+			
+			const centerX = rect.width / 2;
+			const centerY = rect.height / 2;
+			
+			const rotateX = (y - centerY) / 20;
+			const rotateY = (centerX - x) / 20;
+			
+			gsap.to(card, {
+				rotateX: rotateX,
+				rotateY: rotateY,
+				duration: 0.5,
+				ease: "power2.out"
+			});
+		});
+		
+		card.addEventListener('mouseleave', () => {
+			gsap.to(card, {
+				rotateX: 0,
+				rotateY: 0,
+				duration: 0.5,
+				ease: "power2.out"
+			});
+		});
+	});
+</script>
