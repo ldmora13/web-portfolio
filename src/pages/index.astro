@@ -12,8 +12,8 @@ import Contact from '../components/Contact.astro';
 <Layout>
 	<Header/>
 	<main class="overflow-x-hidden">
-		<section>
-			<Hero id="hero"  />
+		<section id="hero">
+			<Hero />
 		</section>
 		<section id="skills">
 			<Skills />
@@ -29,3 +29,57 @@ import Contact from '../components/Contact.astro';
 		</section>
 	</main>
 </Layout>
+
+<script>
+	import { initAnimations, initParticles } from '../scripts/animations.js';
+
+	// Función para inicializar todo
+	function init() {
+		// Pequeño delay para asegurar que el DOM esté completamente listo
+		setTimeout(() => {
+			initAnimations();
+			initParticles();
+		}, 100);
+	}
+
+	// Inicializar animaciones cuando el DOM esté listo
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init);
+	} else {
+		// DOM ya está listo
+		init();
+	}
+
+	// Reinicializar en navegación (para View Transitions)
+	document.addEventListener('astro:page-load', init);
+</script>
+
+<style>
+	/* Smooth scrolling */
+	html {
+		scroll-behavior: smooth;
+	}
+
+	/* Espaciado reducido entre secciones */
+	section {
+		scroll-margin-top: 80px;
+	}
+
+	/* Efectos adicionales de glassmorphism */
+	main {
+		position: relative;
+	}
+
+	/* Animación de delay para efectos pulse */
+	.delay-500 {
+		animation-delay: 500ms;
+	}
+
+	.delay-700 {
+		animation-delay: 700ms;
+	}
+
+	.delay-1000 {
+		animation-delay: 1000ms;
+	}
+</style>
