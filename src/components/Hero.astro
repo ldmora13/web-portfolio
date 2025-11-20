@@ -2,41 +2,76 @@
 import { Github, Linkedin, Mail } from '@lucide/astro'
 ---
 
-<div id="hero" class="min-h-screen relative flex items-center justify-center px-4">
-	<div class="flex flex-col items-center justify-center text-center">
-		<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-green-500" id="subtitle">
-			Software Developer
-		</h2>
-		<h1 class="text-5xl sm:text-7xl md:text-9xl font-bold mt-6 md:mt-10" id="title">
-			Luis David Mora
-		</h1>
-		<div id="info" class="flex flex-col items-center justify-center mt-20 md:mt-40">
-			<p class="text-xl sm:text-2xl md:text-3xl font-bold">
-				Full Stack Developer
-			</p>
-			<div class="flex flex-row items-center justify-center mt-6 md:mt-10 gap-5">
-				<a id="github-link" href="https://github.com/ldmora13" target="_blank" rel="noopener noreferrer" class="social-link">
-					<Github class='h-12 w-12 md:h-15 md:w-15 hover:scale-110 transition-all ease-in-out' />
-				</a>
-				<a id="linkedin-link" href="https://www.linkedin.com/in/luis-david-mora-337253268/" target="_blank" rel="noopener noreferrer" class="social-link">
-					<Linkedin class='h-12 w-12 md:h-15 md:w-15 hover:scale-110 transition-all ease-in-out' />
-				</a>
-				<a id="email-link" href="mailto:ldmora13@gmail.com" class="social-link">
-					<Mail class='h-12 w-12 md:h-15 md:w-15 hover:scale-110 transition-all ease-in-out' />
-				</a>
+<div id="hero" class="min-h-screen relative flex items-center justify-center px-4 pt-20">
+	<!-- Fondo animado con efecto de partículas -->
+	<canvas id="particles-canvas" class="absolute inset-0 w-full h-full"></canvas>
+	
+	<!-- Círculos decorativos con glassmorphism -->
+	<div class="absolute top-20 left-10 w-72 h-72 bg-green-500/10 rounded-full blur-3xl animate-pulse"></div>
+	<div class="absolute bottom-20 right-10 w-96 h-96 bg-green-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+	
+	<div class="relative z-10 flex flex-col items-center justify-center text-center">
+		<div class="backdrop-blur-sm bg-white/5 p-8 md:p-12 rounded-3xl border border-green-500/20 shadow-2xl">
+			<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-green-500 mb-4" id="subtitle">
+				Software Developer
+			</h2>
+			<h1 class="text-5xl sm:text-7xl md:text-9xl font-bold" id="title">
+				<span class="gradient-text">Luis David Mora</span>
+			</h1>
+			<div id="info" class="mt-12 md:mt-16">
+				<p class="text-xl sm:text-2xl md:text-3xl font-bold mb-8">
+					Full Stack Developer
+				</p>
+				<div class="flex flex-row items-center justify-center gap-6">
+					<a id="github-link" href="https://github.com/ldmora13" target="_blank" rel="noopener noreferrer" 
+					   class="social-link backdrop-blur-md bg-white/10 p-4 rounded-full border border-green-500/30 hover:bg-green-500/20 hover:border-green-500 transition-all duration-300">
+						<Github class='h-8 w-8 md:h-10 md:w-10' />
+					</a>
+					<a id="linkedin-link" href="https://www.linkedin.com/in/luis-david-mora-337253268/" target="_blank" rel="noopener noreferrer" 
+					   class="social-link backdrop-blur-md bg-white/10 p-4 rounded-full border border-green-500/30 hover:bg-green-500/20 hover:border-green-500 transition-all duration-300">
+						<Linkedin class='h-8 w-8 md:h-10 md:w-10' />
+					</a>
+					<a id="email-link" href="mailto:ldmora13@gmail.com" 
+					   class="social-link backdrop-blur-md bg-white/10 p-4 rounded-full border border-green-500/30 hover:bg-green-500/20 hover:border-green-500 transition-all duration-300">
+						<Mail class='h-8 w-8 md:h-10 md:w-10' />
+					</a>
+				</div>
 			</div>
+		</div>
+		
+		<!-- Scroll indicator -->
+		<div class="absolute bottom-10 animate-bounce">
+			<svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+			</svg>
 		</div>
 	</div>
 </div>
 
+<style>
+	.gradient-text {
+		background: linear-gradient(90deg, #22c55e, #10b981, #22c55e);
+		background-size: 200% auto;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		animation: gradient 3s ease infinite;
+	}
+
+	@keyframes gradient {
+		0%, 100% { background-position: 0% 50%; }
+		50% { background-position: 100% 50%; }
+	}
+</style>
+
 <script>
 	import { gsap } from "gsap";
 
+	// Animaciones iniciales
 	gsap.from("#title", {
-		y: 50,
+		scale: 0.5,
 		opacity: 0,
-		duration: 1,
-		ease: "power3.out",
+		duration: 1.2,
+		ease: "elastic.out(1, 0.5)",
 		delay: 0.3,
 	});
 
@@ -45,7 +80,7 @@ import { Github, Linkedin, Mail } from '@lucide/astro'
 		opacity: 0,
 		duration: 1,
 		ease: "power3.out",
-		delay: 0.3,
+		delay: 0.1,
 	});
 
 	gsap.from("#info", {
@@ -53,23 +88,101 @@ import { Github, Linkedin, Mail } from '@lucide/astro'
 		opacity: 0,
 		duration: 1,
 		ease: "power3.out",
-		delay: 0.6,
+		delay: 0.8,
 	});
 
-	document.querySelectorAll('.social-link').forEach((link) => {
+	// Animación mejorada para los enlaces sociales
+	document.querySelectorAll('.social-link').forEach((link, index) => {
+		gsap.from(link, {
+			scale: 0,
+			opacity: 0,
+			duration: 0.5,
+			delay: 1 + (index * 0.1),
+			ease: "back.out(2)"
+		});
+
 		link.addEventListener('mouseenter', () => {
 			gsap.to(link, {
-				y: -5,
-				duration: 0.3,
-				ease: "power2.out"
+				scale: 1.2,
+				rotation: 360,
+				duration: 0.5,
+				ease: "back.out(1.7)"
 			});
 		});
+		
 		link.addEventListener('mouseleave', () => {
 			gsap.to(link, {
-				y: 0,
+				scale: 1,
+				rotation: 0,
 				duration: 0.3,
 				ease: "power2.out"
 			});
 		});
 	});
+
+	// Canvas de partículas
+	const canvas = document.getElementById('particles-canvas') as HTMLCanvasElement;
+	const ctx = canvas.getContext('2d');
+	
+	if (ctx) {
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+
+		class Particle {
+			x: number;
+			y: number;
+			size: number;
+			speedX: number;
+			speedY: number;
+			opacity: number;
+
+			constructor() {
+				this.x = Math.random() * canvas.width;
+				this.y = Math.random() * canvas.height;
+				this.size = Math.random() * 2 + 1;
+				this.speedX = Math.random() * 0.5 - 0.25;
+				this.speedY = Math.random() * 0.5 - 0.25;
+				this.opacity = Math.random() * 0.5 + 0.2;
+			}
+
+			update() {
+				this.x += this.speedX;
+				this.y += this.speedY;
+
+				if (this.x > canvas.width) this.x = 0;
+				if (this.x < 0) this.x = canvas.width;
+				if (this.y > canvas.height) this.y = 0;
+				if (this.y < 0) this.y = canvas.height;
+			}
+
+			draw() {
+				if (!ctx) return;
+				ctx.fillStyle = `rgba(34, 197, 94, ${this.opacity})`;
+				ctx.beginPath();
+				ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+				ctx.fill();
+			}
+		}
+
+		const particles: Particle[] = [];
+		for (let i = 0; i < 100; i++) {
+			particles.push(new Particle());
+		}
+
+		function animate() {
+			if (!ctx) return;
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			particles.forEach(particle => {
+				particle.update();
+				particle.draw();
+			});
+			requestAnimationFrame(animate);
+		}
+		animate();
+
+		window.addEventListener('resize', () => {
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+		});
+	}
 </script>
